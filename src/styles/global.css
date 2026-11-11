@@ -19,7 +19,7 @@
   --gray: #464646;
   --red: #d65051;
   --cyan: #5ec2cb;
-  --paren: rgba(59, 198, 243, 0.95);
+  --paren: var(--cyan);
   --f-nav: 'MiraeroNormal', 'Courier New', serif;
   --f-display: 'DeFonte Reduced', 'Pretendard', sans-serif;
   --f-body: 'Pretendard', 'Pretendard Variable', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -76,26 +76,30 @@ ol {
   list-style: none;
 }
 
-/* 활성 메뉴 등에 붙는 작은 원(°) */
+/* 활성 메뉴 등에 붙는 작은 픽셀 동그라미(°) */
+.degree::after,
+.nav-item.active::after,
+.ring {
+  background: currentColor;
+  -webkit-mask: url('/assets/pixel-ring.svg') center / contain no-repeat;
+  mask: url('/assets/pixel-ring.svg') center / contain no-repeat;
+}
 .degree::after,
 .nav-item.active::after {
   content: '';
   display: inline-block;
   width: calc(var(--u) * 16);
   height: calc(var(--u) * 16);
-  min-width: 7px;
-  min-height: 7px;
+  min-width: 8px;
+  min-height: 8px;
   margin-left: calc(var(--u) * 8);
-  border: max(1px, calc(var(--u) * 2)) solid currentColor;
-  border-radius: 50%;
   vertical-align: top;
 }
 .degree::after {
-  width: calc(var(--u) * 8);
-  height: calc(var(--u) * 8);
-  min-width: 5px;
-  min-height: 5px;
-  border-width: 1px;
+  width: calc(var(--u) * 9);
+  height: calc(var(--u) * 9);
+  min-width: 6px;
+  min-height: 6px;
   margin-left: calc(var(--u) * 4);
 }
 
@@ -565,7 +569,7 @@ ol {
 }
 .home-runners {
   left: calc(var(--u) * 805);
-  top: calc(var(--u) * 493);
+  top: calc(var(--u) * 448);
   width: calc(var(--u) * 921);
   animation: slide-in 1.2s 0.3s both;
 }
@@ -734,6 +738,8 @@ ol {
   font-size: max(8px, calc(var(--u) * 11));
   line-height: 1.6;
   white-space: nowrap;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 .team-group a:hover span {
   color: var(--red);
@@ -776,10 +782,9 @@ ol {
 }
 .ring {
   position: absolute;
-  width: calc(var(--u) * 14);
-  height: calc(var(--u) * 14);
-  border: max(1px, calc(var(--u) * 3)) solid var(--cyan);
-  border-radius: 50%;
+  width: calc(var(--u) * 17);
+  height: calc(var(--u) * 17);
+  color: var(--cyan);
 }
 .team-ops .ring {
   left: calc(var(--u) * 594);
@@ -1043,26 +1048,72 @@ ol {
   justify-content: space-between;
   gap: 12px;
 }
-.behind-modal img {
-  width: min(calc(var(--u) * 552), 70vw);
-  min-width: 0;
-  max-height: 72vh;
-  object-fit: contain;
+/* 36.5 Lap 제목과 사진이 붙어 보이지 않게 사진을 줄이고 사이를 띄운다 */
+.modal:has(.behind-modal) .modal-head {
+  margin-bottom: max(18px, calc(var(--u) * 30));
+}
+.behind-slides {
+  display: flex;
+  width: min(max(260px, calc(var(--u) * 460)), 62vw, 50vh);
+  aspect-ratio: 4 / 5;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
   animation: fade 0.3s both;
+}
+.behind-slides::-webkit-scrollbar {
+  display: none;
+}
+.behind-slides img {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
 }
 .behind-arrow {
   font-size: max(32px, calc(var(--u) * 48));
   line-height: 1;
   padding: 8px;
+  transition: opacity 0.2s;
 }
 .behind-arrow:hover {
   color: var(--red);
+}
+.behind-arrow:disabled {
+  opacity: 0.2;
+  cursor: default;
+  color: inherit;
+}
+.behind-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+.behind-dots li {
+  width: 6px;
+  height: 6px;
+  background: #cfcfcf;
+  transition: background-color 0.2s;
+}
+.behind-dots li.is-active {
+  background: var(--red);
 }
 .behind-modal-caption {
   margin-top: 14px;
   text-align: center;
   font-size: max(12px, calc(var(--u) * 16));
   color: var(--gray);
+}
+.behind-modal-caption a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.behind-modal-caption a:hover {
+  color: var(--red);
 }
 
 /* ---------- Animations ---------- */
@@ -1234,7 +1285,9 @@ ol {
     padding-bottom: 40px;
   }
   .home-temp {
-    width: 62%;
+    width: 82%;
+    /* 이미지 안쪽 여백만큼 당겨서 질문 문구와 왼쪽을 맞춘다 */
+    margin-left: -9.5%;
   }
   .home-question {
     width: auto;
@@ -1247,8 +1300,16 @@ ol {
   .home-vol {
     font-size: 13px;
   }
+  .home-info {
+    order: 2;
+  }
   .home-vol {
-    text-align: left;
+    order: 1;
+    margin-top: 16px;
+    text-align: right;
+  }
+  .home-date {
+    display: block;
   }
 
   /* About */
@@ -1381,41 +1442,81 @@ ol {
     padding: 0;
   }
 
-  /* Behind */
+  /* Behind: 390 모바일 시안 좌표계 (calc(var(--m) * N) == 시안상의 N px) */
   .behind-stage {
-    height: auto;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 36px 12px;
-    padding-bottom: 40px;
+    --m: calc(min(100vw, 520px) / 390);
+    width: calc(var(--m) * 390);
+    height: calc(var(--m) * 850);
+    margin-left: calc(50% - var(--m) * 195);
+  }
+  .behind-stage > * {
+    position: absolute;
   }
   .behind-word {
-    grid-column: 1 / -1;
-    font-size: 34px;
+    font-size: calc(var(--m) * 24);
+  }
+  .w-the {
+    left: calc(var(--m) * 28);
+    top: calc(var(--m) * 116);
   }
   .w-history {
-    text-align: right;
+    left: calc(var(--m) * 282);
+    right: auto;
+    top: calc(var(--m) * 329);
   }
   .w-archive {
-    order: 10;
+    left: calc(var(--m) * 28);
+    top: calc(var(--m) * 770);
   }
   .behind-card {
-    position: relative !important;
-    left: auto;
-    top: auto;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 207 / 259;
+    left: calc(var(--m) * var(--mx));
+    top: calc(var(--m) * var(--my));
+    width: calc(var(--m) * 88.5);
+    height: calc(var(--m) * 110.9);
+  }
+  .behind-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .behind-no {
+    font-family: var(--f-body);
+    font-size: calc(var(--m) * 12);
   }
   .label-top .behind-no,
   .label-top-end .behind-no,
   .label-bottom .behind-no {
     top: auto;
-    bottom: calc(100% + 4px);
-    left: 0;
+    bottom: calc(100% + 3px);
+    left: 6px;
     right: auto;
   }
+
+  /* Behind 팝업 */
+  .modal:has(.behind-modal) {
+    width: min(100%, 380px);
+    padding: 22px 12px 28px;
+  }
+  .modal:has(.behind-modal) .modal-head {
+    margin-bottom: 18px;
+    padding: 0 8px;
+  }
+  .modal:has(.behind-modal) .modal-head h2 {
+    font-size: 15px;
+  }
+  .modal:has(.behind-modal) .modal-close {
+    font-size: 26px;
+    margin-right: 0;
+  }
   .behind-modal {
-    gap: 4px;
+    gap: 2px;
+  }
+  .behind-slides {
+    flex: 1;
+    width: auto;
+    min-width: 0;
+  }
+  .behind-arrow {
+    font-size: 26px;
+    padding: 6px;
   }
 }

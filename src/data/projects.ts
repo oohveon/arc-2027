@@ -28,7 +28,12 @@ export interface Floor {
 export interface BehindItem {
   no: number
   title: string
+  /** 목록에 보이는 썸네일 */
   image: string
+  /** 팝업에서 인스타 피드처럼 넘겨 보는 이미지들. 비어 있으면 썸네일 한 장만 보여준다 */
+  slides?: string[]
+  /** 제목을 누르면 열리는 인스타 게시물 주소. 없으면 ARC 인스타 프로필로 간다 */
+  link?: string
 }
 
 export const PROJECTS: Project[] = [

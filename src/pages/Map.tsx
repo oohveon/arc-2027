@@ -25,8 +25,7 @@ export default function MapPage() {
         {data.works.map((w) => (
           <li key={w.no}>
             <strong>
-              <em>{w.no}.</em>
-              {w.title}
+              <em>{w.no}</em> {w.title}
             </strong>
             <span>{w.artists}</span>
           </li>

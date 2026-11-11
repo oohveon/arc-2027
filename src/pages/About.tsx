@@ -18,8 +18,8 @@ function TeamGroup({ group }: { group: TeamGroupData }) {
         {group.members.map((m) => (
           <li key={m.photo}>
             <a href={`https://www.instagram.com/${m.handle}/`} target="_blank" rel="noreferrer">
-              <img src={`/assets/team/${m.photo}.png`} alt={`@${m.handle}`} loading="lazy" />
-              <span>@{m.handle}</span>
+              <img src={`/assets/team/${m.photo}.png`} alt={m.name} loading="lazy" />
+              <span>{m.name}</span>
             </a>
           </li>
         ))}
@@ -65,8 +65,6 @@ export default function About() {
                 {EXHIBITION.venue}
                 <br />
                 {EXHIBITION.address}
-                <br />
-                {EXHIBITION.date}
               </dd>
             </dl>
             <img src="/assets/about-map.png" alt="전시장 위치 지도" />
@@ -108,7 +106,7 @@ export default function About() {
           </div>
           <div className="team-grid">
             <span className="paren paren-open" aria-hidden="true">(</span>
-            {['DESIGN', 'PLANNING', 'SPACE', 'OFFICE', 'WEB DESIGN', 'WEB'].map((n) => (
+            {['DESIGN', 'CONT. PLANNING', 'SPACE', 'OFFICE', 'WEB DESIGN', 'WEB'].map((n) => (
               <TeamGroup key={n} group={byName[n]} />
             ))}
             <span className="paren paren-close" aria-hidden="true">)</span>

@@ -35,7 +35,7 @@ export default function Home() {
         <p className="home-info">
           {EXHIBITION.venue}
           <br />
-          {EXHIBITION.address} {EXHIBITION.date}
+          {EXHIBITION.address} <span className="home-date">{EXHIBITION.date}</span>
         </p>
         <p className="home-vol">
           ARC
