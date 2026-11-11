@@ -13,7 +13,7 @@ export interface TeamGroup {
 
 export const EXHIBITION = {
   title: 'ARC EXHIBITION VOL. 2',
-  date: '27.01.28 - 02.02',
+  date: '27.01.28 - 02.01',
   venue: 'Maru Art Center 2F Gallery 5 · 3F Grand Hall',
   address: '35-6, Insadong-gil, Jongno-gu, Seoul',
   instagram: 'arc__project',

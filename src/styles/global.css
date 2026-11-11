@@ -145,7 +145,7 @@ ol {
 }
 .logo-fixed {
   position: fixed;
-  top: calc(var(--u) * 87);
+  top: calc(var(--u) * 62);
   right: calc(var(--u) * 80);
   z-index: 30;
 }
@@ -687,7 +687,7 @@ ol {
   top: calc(var(--u) * 521);
   font-family: var(--f-display);
   font-size: max(13px, calc(var(--u) * 24));
-  color: #333;
+  color: var(--cyan);
 }
 .about-overview-text .desc {
   position: absolute;
@@ -1158,7 +1158,7 @@ ol {
     position: static;
   }
   .logo-fixed {
-    top: 18px;
+    top: 23px;
     left: 16px;
     right: auto;
   }
@@ -1317,9 +1317,7 @@ ol {
     height: auto;
     padding-bottom: 20px;
   }
-  .about-blocks,
-  .paren,
-  .ring {
+  .about-blocks {
     display: none;
   }
   .about section,
@@ -1369,11 +1367,66 @@ ol {
   .about-overview-text .desc {
     margin-top: 8px;
   }
+  .team-ops,
+  .team-grid {
+    position: relative;
+    left: 0;
+    top: 0;
+    padding: 0 26px;
+  }
   .team-ops {
     margin-top: 20px;
   }
+  .team-ops .team-group ul {
+    gap: 8px;
+  }
+  .team-ops .team-group li {
+    width: 52px;
+  }
   .team-grid {
     display: block;
+  }
+  /* 괄호와 동그라미 (390 모바일 시안: 운영진 한 줄 + 나머지 팀 묶음) */
+  .paren {
+    font-size: 40px;
+  }
+  .ring {
+    width: 8px;
+    height: 8px;
+  }
+  .team-ops .paren:first-child,
+  .team-grid .paren-open {
+    left: -2px;
+  }
+  .team-ops .paren:first-child {
+    top: 26px;
+  }
+  .team-grid .paren-open {
+    top: 46px;
+  }
+  .team-ops .paren:nth-child(3),
+  .team-grid .paren-close {
+    left: auto;
+    right: -2px;
+  }
+  .team-ops .paren:nth-child(3) {
+    top: 26px;
+  }
+  .team-grid .paren-close {
+    top: auto;
+    bottom: 6px;
+  }
+  .team-ops .ring,
+  .team-grid .ring-end {
+    left: auto;
+    right: -4px;
+  }
+  .team-ops .ring {
+    top: 32px;
+  }
+  .team-grid .ring-end {
+    top: auto;
+    bottom: 58px;
   }
   .team-group {
     margin-top: 20px;
