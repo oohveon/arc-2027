@@ -926,12 +926,24 @@ ol {
   line-height: 1.2;
   margin-bottom: max(24px, calc(var(--u) * 52));
 }
-.project-modal-info .contacts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 0.4em;
+.project-modal-info .members {
+  display: grid;
+  gap: max(4px, calc(var(--u) * 6)) 0;
+  margin-bottom: max(24px, calc(var(--u) * 52));
+  color: var(--gray);
+  font-size: max(13px, calc(var(--u) * 20));
+  line-height: 1.2;
 }
-.project-modal-info .contacts a:hover {
+.project-modal-info .members li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+}
+.project-modal-info .members li span {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.project-modal-info .members a:hover {
   color: var(--red);
 }
 .project-modal-info .desc {
@@ -1051,6 +1063,12 @@ ol {
 /* 36.5 Lap 제목과 사진이 붙어 보이지 않게 사진을 줄이고 사이를 띄운다 */
 .modal:has(.behind-modal) .modal-head {
   margin-bottom: max(18px, calc(var(--u) * 30));
+}
+.modal:has(.behind-modal) .modal-head h2 {
+  font-size: max(14px, calc(var(--u) * 22));
+}
+.modal:has(.behind-modal) .modal-close {
+  font-size: max(22px, calc(var(--u) * 32));
 }
 .behind-slides {
   display: flex;
@@ -1463,8 +1481,19 @@ ol {
     grid-template-columns: 1fr;
   }
   .project-modal-info h3,
-  .project-modal-info p {
+  .project-modal-info p,
+  .project-modal-info .members {
     margin-bottom: 16px;
+  }
+  .project-modal-info .members {
+    grid-auto-flow: column;
+    grid-template-rows: repeat(var(--rows), auto);
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 12px;
+    font-size: 10px;
+  }
+  .project-modal-info .members li {
+    gap: 6px;
   }
 
   /* Map */

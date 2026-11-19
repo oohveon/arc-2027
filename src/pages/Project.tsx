@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import Layout from '../components/Layout'
 import Modal from '../components/Modal'
 import { CATEGORIES, PROJECTS, type Category, type Project as ProjectData } from '../data/projects'
@@ -87,18 +87,20 @@ export default function Project() {
               <div>
                 <h3 className="degree">{selected.title}</h3>
                 <h4>{selected.team}</h4>
-                <p>{selected.members}</p>
-                {selected.contacts.length > 0 && (
-                  <>
-                    <h4>Contact</h4>
-                    <p className="contacts">
-                      {selected.contacts.map((c) => (
-                        <a key={c} href={`https://www.instagram.com/${c}/`} target="_blank" rel="noreferrer">
-                          @{c}
+                {selected.members.length > 0 && (
+                  <ul
+                    className="members"
+                    style={{ '--rows': Math.ceil(selected.members.length / 2) } as CSSProperties}
+                  >
+                    {selected.members.map((m) => (
+                      <li key={m.handle}>
+                        <span>{m.name}</span>
+                        <a href={`https://www.instagram.com/${m.handle}/`} target="_blank" rel="noreferrer">
+                          @{m.handle}
                         </a>
-                      ))}
-                    </p>
-                  </>
+                      </li>
+                    ))}
+                  </ul>
                 )}
               </div>
               <div>

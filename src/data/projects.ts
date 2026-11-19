@@ -7,8 +7,7 @@ export interface Project {
   category: Exclude<Category, 'All'>
   title: string
   team: string
-  members: string
-  contacts: string[]
+  members: { name: string; handle: string }[]
   image: string | null
   description: string
 }
@@ -42,8 +41,13 @@ export const PROJECTS: Project[] = [
     category: 'Graphic',
     title: '언어의 틈',
     team: '언어연구소',
-    members: '이여진 김세은 김나은 양윤 이동은',
-    contacts: ['0to179', 'nanan__a__a', 'dong_eun.01', 'yooniverse_yoon', 'aftershock.__03'],
+    members: [
+      { name: '이여진', handle: 'aftershock.__03' },
+      { name: '김세은', handle: '0to179' },
+      { name: '김나은', handle: 'nanan__a__a' },
+      { name: '양윤', handle: 'yooniverse_yoon' },
+      { name: '이동은', handle: 'dong_eun.01' },
+    ],
     image: '/assets/project-graphic-01.png',
     description:
       '디자인과 개발 사이에서 기준을 세우고 조율하는 과정은 많은 에너지가 필요합니다. 보이지 않던 화면의 뼈대를 잡고 여백과 색상의 규칙을 정하는 모든 순간이 값진 밑거름이 됩니다. 지금 고민하는 작은 디테일들이 모여 관람객에게 감각적인 경험을 선사할 것입니다. 치열하게 고민한 오늘 하루 정말 고생 많으셨습니다. 멋진 결과물로 잘 이어지길 진심으로 응원합니다.',
@@ -53,8 +57,7 @@ export const PROJECTS: Project[] = [
     category,
     title: '[작품 제목]',
     team: '[팀 이름]',
-    members: '[참가자 이름]',
-    contacts: [],
+    members: [],
     image: null,
     description: '[작품 설명]',
   })),
