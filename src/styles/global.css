@@ -1602,3 +1602,32 @@ ol {
     padding: 6px;
   }
 }
+
+/* ---------- 스크롤 진입 모션 ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal]:not([data-in]) {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  [data-reveal] {
+    transition:
+      opacity 0.8s ease,
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  [data-reveal][data-in] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Lenis 권장 설정 */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}

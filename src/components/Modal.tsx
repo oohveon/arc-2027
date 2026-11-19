@@ -26,7 +26,7 @@ export default function Modal({ title, onClose, children, onPrev, onNext }: Moda
   }, [onClose, onPrev, onNext])
 
   return createPortal(
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-overlay" data-lenis-prevent onClick={onClose}>
       <div className="modal" role="dialog" aria-modal="true" aria-label={title} onClick={(e) => e.stopPropagation()}>
         <header className="modal-head">
           <h2>{title}</h2>
